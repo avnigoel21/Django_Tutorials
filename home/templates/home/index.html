@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block start %}
+    <h1> hi from html template</h1>
+
+    <table style="width:100%">
+        <tr>
+          <th>S.No</th>
+          <th>Name</th> 
+          <th>Age</th>
+          <th>Can vote</th>
+        </tr>
+
+        {% for people in peoples %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{people.name}}</td>
+          <td>{{people.age}}</td>
+          <td>
+            {% if people.age >= 18 %}
+            👍
+            {% else %}
+            👎
+            {% endif %}
+            </td>
+        </tr>
+
+        {% endfor %}
+        
+      </table>
+
+      <p>{{text|truncatechars:40}}</p>
+
+
+      {% if "potato" in vegetables %}
+          yes available
+        
+      {% else %}
+          not available
+      {% endif %}
+
+
+      <a href = "/contact/">
+        contact page
+      </a>
+
+{% endblock %} 
+
