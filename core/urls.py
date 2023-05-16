@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from core.settings import *
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 from home.views import *
 
 from vege.views import *
@@ -29,13 +33,15 @@ urlpatterns = [
 
     path('receipes/' , receipes , name = "receipes"),
     path('delete_receipes/<id>/' , delete_receipes , name = "delete_receipes"),
+
+     path('update_receipes/<id>/' , update_receipes , name = "update_receipes"),
+
     path('contact/' , contact , name = "contact"),
     
     path('admin/', admin.site.urls),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += STATIC_ROOT(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)
 
-# urlpatterns += staticfiles_urlpatterns()
-
+urlpatterns += staticfiles_urlpatterns()
