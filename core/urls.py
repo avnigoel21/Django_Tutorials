@@ -37,6 +37,9 @@ urlpatterns = [
      path('update_receipes/<id>/' , update_receipes , name = "update_receipes"),
 
     path('contact/' , contact , name = "contact"),
+
+    path('register/' , register , name = "register"),
+    path('login/' , login_page , name = "login_page"),
     
     path('admin/', admin.site.urls),
 ]
