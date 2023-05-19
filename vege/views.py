@@ -4,10 +4,13 @@ from .models import *
 from django.contrib.auth.models import User
 
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.auth import authenticate , login , logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required(login_url = "/login/")
 def receipes(request):
     if request.method == "POST":
 
@@ -33,7 +36,7 @@ def receipes(request):
 
     return render(request , "receipes.html" , context)
 
-
+@login_required(login_url= "/login/")
 def update_receipes(request , id):
     queryset = Receipe.objects.get(id = id)
 
@@ -58,7 +61,7 @@ def update_receipes(request , id):
     return render(request , "update_receipes.html" , context)
 
 
-
+@login_required(login_url = "/login/")
 def delete_receipes(request, id):
 
 
@@ -68,7 +71,29 @@ def delete_receipes(request, id):
 
 
 def login_page(request):
+
+    if request.method =="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not User.objects.filter(username = username).exists():
+            messages.error(request, "Invalid Username")
+            return redirect('/login/')
+        
+        user = authenticate(username = username , password = password)
+
+        if user is None:
+            messages.error(request, "Invalid Password")
+            return redirect("/login")
+        else:
+            login(request , user)
+            return redirect('/receipes/')
+
+
+
+
     return render(request , 'login.html')
+
 
 
 def register(request):
@@ -78,6 +103,12 @@ def register(request):
         last_name = request.POST.get('last_name')
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        user = User.objects.filter(username = username)
+
+        if user.exists():
+            messages.info(request, "Username already taken")
+            return redirect('/register/')
 
 
         user = User.objects.create(
@@ -89,7 +120,12 @@ def register(request):
         user.set_password(password)
         user.save()
 
-        return redirect('/register')
+        return redirect('/register/')
 
 
     return render(request , 'register.html')
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login/')
