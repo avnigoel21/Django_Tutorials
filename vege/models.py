@@ -14,6 +14,7 @@ class Receipe(models.Model):
 class Department(models.Model):
     department = models.CharField(max_length=100)
 
+
     def __str__(self) -> str:
         return self.department
     
