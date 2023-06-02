@@ -88,10 +88,6 @@ def login_page(request):
         else:
             login(request , user)
             return redirect('/receipes/')
-
-
-
-
     return render(request , 'login.html')
 
 
