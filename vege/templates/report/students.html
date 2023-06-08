@@ -3,7 +3,7 @@
 
 
 <div class="container mt-5">
-
+    
     <form>
         <div class="row">
             <div class="col-md-6">
@@ -32,7 +32,8 @@
             {% for student in queryset %}
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{student.student_id}}</td>
+                <td><a href="/see_marks/{{student.student_id}}">{{student.student_id}}</a></td>
+                
                 <td>{{student.department}}</td>
                 <td>{{student.student_name}}</td>
                 <td>{{student.student_email}}</td>
@@ -64,7 +65,7 @@
     </nav>
 
 
-
+    
 
 </div>
 {% endblock %}
