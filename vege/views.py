@@ -152,10 +152,16 @@ def get_students(request):
     return render(request , 'report/students.html' , {'queryset' :page_obj})
 
 
+
+
+from .seed import generate_record_card
+
+
 def see_marks(request , student_id):
+    # generate_record_card()
     queryset = SubjectMarks.objects.filter(student__student_id__student_id = student_id)
 
     total_marks = queryset.aggregate(total_marks = Sum('marks'))
 
-    
+
     return render(request, 'report/see_marks.html' , {'queryset' : queryset , 'total_marks' :total_marks})
