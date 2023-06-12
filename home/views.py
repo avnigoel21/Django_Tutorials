@@ -1,8 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 
 from django.http import HttpResponse
 
+from .utils import *
+
 # Create your views here.
+
+
+def send_email(request):
+    send_email_to_client()
+    return redirect("/")
 
 def home(request):
     # return HttpResponse("hey, i am django server")

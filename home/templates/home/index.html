@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block start %}
+
+ <div>
+  <h1> This is Sent Email</h1>
+  <a href="{% url 'send_email' %}" class="btn btn-success">Send Email</a>
+ </div>
+
+
     <h1> hi from html template</h1>
 
     <table style="width:100%">

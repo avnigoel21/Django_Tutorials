@@ -30,6 +30,7 @@ from vege.views import *
 urlpatterns = [
 
     path('', home, name = "home"),
+    path('send_email/' , send_email , name = "send_email"),
 
     path('receipes/' , receipes , name = "receipes"),
     path('delete_receipes/<id>/' , delete_receipes , name = "delete_receipes"),

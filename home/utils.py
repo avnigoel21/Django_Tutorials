@@ -1,7 +1,18 @@
 from home.models import Student
 import time
 
-def run_this_function ():
-    print("function started")
-    time.sleep(2)
-    print("function ended")
+from django.core.mail import send_mail
+from django.conf import settings
+
+# def run_this_function ():
+#     print("function started")
+#     time.sleep(2)
+#     print("function ended")
+
+def send_email_to_client():
+    subject = "This email is from Django server"
+    message = "This is a test message from django"
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = ["avnigoel216@gmail.com"]
+    send_mail(subject , message , from_email , recipient_list)
+    
