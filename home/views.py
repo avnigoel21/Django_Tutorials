@@ -1,18 +1,27 @@
+import random
 from django.shortcuts import render , redirect
 
 from django.http import HttpResponse
 
 from .utils import *
+from django.conf import settings
+from home.models import Car
 
 # Create your views here.
 
 
 def send_email(request):
-    send_email_to_client()
+    subject = "This email is from Django server with Attachment"
+    message = "This is a test message from django with attach file"
+    recipient_list = ["avnigoel.volunteer@gmail.com"]
+    file_path = f'{settings.BASE_DIR}/main.xlsx'
+    send_email_with_attachment(subject , message , recipient_list , file_path)
     return redirect("/")
 
 def home(request):
     # return HttpResponse("hey, i am django server")
+
+    Car.objects.create(car_name = f'Nexon-{random.randint(0 , 50)}')
 
     peoples = [
         {'name' : 'Avni' , 'age' : 26},
