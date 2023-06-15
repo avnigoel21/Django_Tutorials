@@ -29,6 +29,6 @@ class Car(models.Model):
 #     car_speed : 120
 # }
 
-@receiver(post_save , Sender = Car)
-def call_car_api(sender , instance , **kwargs):
-    print("Request finished!")
+# @receiver(post_save , Sender = Car)
+# def call_car_api(sender , instance , **kwargs):
+#     print("Request finished!")
